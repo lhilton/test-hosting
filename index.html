@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Crispy Hash Brown Breakfast Casserole (Bacon + Sausage)</title>
   <meta name="description" content="A 90-minute breakfast casserole for 5 with crispy (not soggy!) shredded hash browns, bacon, sausage, and carrots+peas." />
+
+  <!-- Inline favicon (no external files) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ffcc66'/%3E%3Cstop offset='1' stop-color='%237dd3fc'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect rx='28' ry='28' width='128' height='128' fill='%230b0f14'/%3E%3Cpath d='M26 88c7-24 26-50 52-52 20-2 34 10 36 26 2 16-7 30-22 38-17 9-40 6-66-12z' fill='url(%23g)'/%3E%3Cpath d='M36 92c16 11 36 14 50 8 13-5 21-16 20-28-1-11-9-18-21-17-20 1-36 21-49 37z' fill='%23ffffff' fill-opacity='.14'/%3E%3Ctext x='64' y='78' text-anchor='middle' font-family='ui-monospace,Menlo,Consolas' font-size='18' fill='%23ffffff' fill-opacity='.9'%3ECRISP%3C/text%3E%3C/svg%3E" />
+
   <style>
     :root{
+      /* Pretty mode palette */
       --bg:#0b0f14;
       --card:rgba(255,255,255,.06);
       --card2:rgba(255,255,255,.09);
@@ -23,7 +28,16 @@
       --max: 1120px;
       --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+
+      /* Print mode palette (also used by "Print Mode" toggle) */
+      --paper:#ffffff;
+      --ink:#111827;
+      --pmuted:#374151;
+      --pline:#e5e7eb;
+      --paccent:#0f766e;
+      --paccent2:#7c3aed;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -37,9 +51,13 @@
         var(--bg);
       line-height:1.55;
     }
+
     a{color:var(--accent2); text-decoration:none}
     a:hover{text-decoration:underline}
+
     .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
+
+    /* HERO (pretty mode) */
     .hero{
       position:relative;
       overflow:hidden;
@@ -68,6 +86,7 @@
       display:grid;
       gap:14px;
     }
+
     .kicker{
       display:inline-flex;
       gap:10px;
@@ -77,6 +96,7 @@
       font-size:12px;
       letter-spacing:.08em;
       text-transform:uppercase;
+      flex-wrap:wrap;
     }
     .pill{
       padding:6px 10px;
@@ -85,6 +105,7 @@
       background:rgba(255,255,255,.08);
       backdrop-filter: blur(8px);
     }
+
     h1{
       margin:0;
       font-size: clamp(28px, 4vw, 44px);
@@ -97,12 +118,15 @@
       color:var(--muted);
       font-size: clamp(14px, 2.1vw, 18px);
     }
+
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin-top:8px;
+      align-items:center;
     }
+
     .btn{
       appearance:none;
       border:1px solid rgba(255,255,255,.18);
@@ -121,6 +145,17 @@
     .btn.primary{
       background:linear-gradient(135deg, rgba(255,204,102,.25), rgba(125,211,252,.18));
       border-color:rgba(255,204,102,.35);
+    }
+
+    .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:2px 8px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      display:inline-block;
     }
 
     .grid{
@@ -184,6 +219,7 @@
     }
     .list li{margin:8px 0}
     .muted{color:var(--muted)}
+
     .callout{
       padding:14px 14px;
       border-radius:14px;
@@ -191,6 +227,7 @@
       border:1px solid rgba(255,255,255,.12);
     }
     .callout b{color:#fff}
+
     .rule{
       display:flex;
       gap:10px;
@@ -260,16 +297,6 @@
       font-size:13px;
       color:var(--muted);
     }
-    .kbd{
-      font-family:var(--mono);
-      font-size:12px;
-      padding:2px 8px;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      display:inline-block;
-    }
 
     footer{
       margin-top:16px;
@@ -279,14 +306,134 @@
       padding-top:14px;
     }
 
-    /* Print: make it clean and ink-friendly */
+    /* PRINT MODE TOGGLE (class-based, also mirrors @media print) */
+    body.printmode{
+      background: linear-gradient(180deg, #f8fafc, #ffffff);
+      color: var(--ink);
+    }
+    body.printmode a{color: var(--ink); text-decoration:none}
+    body.printmode .hero{
+      min-height:auto;
+      background: var(--paper);
+      box-shadow:none;
+      border:1px solid var(--pline);
+    }
+    body.printmode .hero::after{display:none}
+    body.printmode .hero-inner{padding:18px 18px 14px}
+    body.printmode .pill, body.printmode .meta span{
+      border:1px solid var(--pline);
+      background:#f9fafb;
+      color: var(--pmuted);
+      backdrop-filter:none;
+    }
+    body.printmode .btn{
+      border:1px solid var(--pline);
+      background:#111827;
+      color:#fff;
+      backdrop-filter:none;
+    }
+    body.printmode .btn.secondary{
+      background:#fff;
+      color:#111827;
+    }
+    body.printmode .sub, body.printmode .small, body.printmode .muted, body.printmode .time, body.printmode footer{
+      color: var(--pmuted);
+    }
+    body.printmode .card{
+      box-shadow:none;
+      border:1px solid var(--pline);
+      background: var(--paper);
+    }
+    body.printmode .card .hd{border-bottom:1px solid var(--pline)}
+    body.printmode .steps li{
+      background: var(--paper);
+      border:1px solid var(--pline);
+    }
+    body.printmode .steps li::before{
+      background:#f3f4f6;
+      color: var(--ink);
+      box-shadow:none;
+    }
+    body.printmode .callout{
+      background:#fafafa;
+      border:1px dashed var(--pline);
+    }
+    body.printmode .callout b{color: var(--ink)}
+    body.printmode .rule{
+      background:#fff;
+      border:1px solid var(--pline);
+    }
+    body.printmode .dot{
+      background: var(--paccent);
+      box-shadow: 0 0 0 4px rgba(15,118,110,.12);
+    }
+    body.printmode .dot.warn{
+      background:#b91c1c;
+      box-shadow: 0 0 0 4px rgba(185,28,28,.10);
+    }
+    body.printmode .side-photo{display:none}
+    body.printmode .hero-actions .btn{display:none} /* hide most buttons in printmode */
+    body.printmode .hero-actions .btn.keep{display:inline-block} /* keep only certain ones */
+
+    /* QR box (only visible in Print Mode / Print) */
+    .qrbox{
+      display:none;
+      margin-top:12px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      gap:12px;
+      align-items:center;
+      max-width: 680px;
+    }
+    body.printmode .qrbox{
+      display:flex;
+      border:1px solid var(--pline);
+      background:#fff;
+    }
+    .qrimg{
+      width:120px;
+      height:120px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.10);
+      background:#fff;
+      flex:0 0 auto;
+    }
+    .qrtext{
+      display:grid;
+      gap:6px;
+      color: var(--muted);
+    }
+    body.printmode .qrtext{color: var(--pmuted)}
+    .qrtext .label{
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color: inherit;
+    }
+    .qrtext .url{
+      font-family:var(--mono);
+      font-size:12px;
+      color: inherit;
+      word-break: break-all;
+    }
+    .qrtext .hint{
+      font-size:13px;
+      color: inherit;
+    }
+
+    /* PRINT */
     @media print{
       body{background:#fff; color:#111}
-      .wrap{max-width:900px}
+      .wrap{max-width:900px; padding:0}
       .hero{min-height:auto; background:#fff; box-shadow:none; border:none}
       .hero::after{display:none}
       .hero-inner{padding:0 0 10px}
-      .btn, .side-photo{display:none !important}
+      .hero-actions{display:none !important}
+      .side-photo{display:none !important}
+      .qrbox{display:flex !important; border:1px solid #ddd; background:#fff}
       .card{box-shadow:none; border:1px solid #ddd}
       .card .hd{border-bottom:1px solid #ddd}
       a{color:#111; text-decoration:none}
@@ -305,22 +452,38 @@
         <div class="kicker">
           <span class="pill">90 minutes or less</span>
           <span class="pill">serves 5</span>
-          <span class="pill">crispy hash browns (promise)</span>
+          <span class="pill">bacon + sausage</span>
+          <span class="pill">carrots + peas</span>
+          <span class="pill">crispy hash browns</span>
         </div>
 
         <h1>Crispy Hash Brown Breakfast Casserole<br/>with Bacon + Sausage + Carrots &amp; Peas</h1>
         <p class="sub">
-          This is built like a tiny potato fortress: we thaw, squeeze, and pre-crisp the hash browns so they stay golden instead of turning into a soggy memoir.
+          Built like a tiny potato fortress: thaw, squeeze, pre-crisp. The eggs arrive later, politely, without turning everything into soggy folklore.
         </p>
 
         <div class="hero-actions">
-          <button class="btn primary" onclick="document.getElementById('recipe').scrollIntoView({behavior:'smooth'})">Jump to Recipe</button>
-          <button class="btn" onclick="window.print()">Print</button>
+          <button class="btn primary keep" onclick="document.getElementById('recipe').scrollIntoView({behavior:'smooth'})">Jump to Recipe</button>
+          <button class="btn keep" onclick="togglePrintMode()">
+            Toggle Print Mode
+          </button>
+          <button class="btn keep secondary" onclick="window.print()">Print</button>
           <button class="btn" onclick="navigator.clipboard?.writeText(location.href).then(()=>toast('Link copied ✨')).catch(()=>toast('Copy not supported here'))">
             Copy Page Link
           </button>
           <span class="pill small"><span class="kbd">Tip</span> Uncovered bake = less steam = more crisp</span>
         </div>
+
+        <!-- QR (appears in Print Mode and on print) -->
+        <div class="qrbox" aria-label="QR code for this recipe">
+          <img class="qrimg" id="qrimg" alt="QR code linking to this recipe" />
+          <div class="qrtext">
+            <div class="label">Scan for the pretty page</div>
+            <div class="hint">This QR points to the recipe URL below (edit it once and it sticks):</div>
+            <div class="url" id="qrurl"></div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -330,7 +493,7 @@
         <header class="hd">
           <div>
             <h2>Ingredients</h2>
-            <div class="small">Scaled for 5. No cheese listed since you didn’t mention it, but there’s an optional slot if you’ve got some.</div>
+            <div class="small">Scaled for 5. Cheese is optional if you’ve got it lurking in the fridge.</div>
           </div>
           <div class="meta" aria-label="Recipe meta">
             <span>Prep: ~30 min</span>
@@ -366,7 +529,7 @@
           </div>
 
           <div class="callout" style="margin-top:14px">
-            <b>The anti-soggy spell:</b> thaw → squeeze dry → pre-crisp in the pan → cook veggies dry → bake uncovered → rest before slicing.
+            <b>The anti-soggy spell:</b> thaw → squeeze dry → pre-crisp in the pan → cook veg dry → bake uncovered → rest before slicing.
           </div>
 
           <h2 style="margin:18px 0 10px">Steps</h2>
@@ -378,12 +541,12 @@
             </li>
             <li>
               <b>Thaw + squeeze hash browns</b><br/>
-              Microwave hash browns <b>2–3 min</b>, stir, then <b>2–3 min</b> more until thawed. Wrap in a clean towel and squeeze hard until noticeably drier.
+              Microwave hash browns <b>2–3 min</b>, stir, then <b>2–3 min</b> more until thawed. Dump into a towel and squeeze until dry.
               <div class="time">~10 min</div>
             </li>
             <li>
               <b>Pre-crisp the hash browns</b><br/>
-              Toss dried hash browns with <b>2–3 tbsp</b> oil/butter/bacon fat, plus <b>½ tsp salt</b>, <b>½ tsp pepper</b>, <b>½ tsp garlic</b>, <b>½ tsp paprika</b>. Spread in an even layer and bake <b>20–25 min</b> at <b>425°F</b> until the top is turning golden.
+              Toss dried hash browns with <b>2–3 tbsp</b> oil/butter/bacon fat, plus <b>½ tsp salt</b>, <b>½ tsp pepper</b>, <b>½ tsp garlic</b>, <b>½ tsp paprika</b>. Spread in an even layer and bake <b>20–25 min</b> at <b>425°F</b> until golden on top.
               <div class="time">~20–25 min</div>
             </li>
             <li>
@@ -420,9 +583,9 @@
 
           <h2 style="margin:18px 0 10px">Crispiness Checklist</h2>
           <div class="rule"><span class="dot"></span><div><b>Squeeze the hash browns.</b> If they can drip, they can sog.</div></div>
-          <div class="rule"><span class="dot"></span><div><b>Pre-crisp at 425°F.</b> We’re building a crunchy roof before the egg “weather” moves in.</div></div>
-          <div class="rule"><span class="dot"></span><div><b>Cook the carrots + peas dry.</b> Steam is great for sweaters, terrible for potatoes.</div></div>
-          <div class="rule"><span class="dot warn"></span><div><b>Avoid covering while baking.</b> Foil traps steam and turns crisp into “soft regret.”</div></div>
+          <div class="rule"><span class="dot"></span><div><b>Pre-crisp at 425°F.</b> Crunch first, eggs later.</div></div>
+          <div class="rule"><span class="dot"></span><div><b>Cook carrots+peas dry.</b> Veg moisture is stealth-sog.</div></div>
+          <div class="rule"><span class="dot warn"></span><div><b>Don’t cover while baking.</b> Foil traps steam and turns crisp into “soft regret.”</div></div>
         </div>
       </article>
 
@@ -441,9 +604,9 @@
 
           <div class="callout" style="margin-top:14px">
             <b>Optional upgrades</b><br/>
-            • Sprinkle cheese on top for a golden lid<br/>
-            • Add onion powder if you’ve got it<br/>
-            • Finish with a 2-minute broil (watch closely)
+            • Add 1–1½ cups cheese for a golden lid<br/>
+            • Finish with a 2-minute broil (watch closely)<br/>
+            • Wider dish = more crispy edges
           </div>
 
           <footer>
@@ -459,8 +622,42 @@
   </main>
 
   <script>
+    /*
+      QR behavior:
+      - By default uses current page URL (location.href).
+      - If you later publish this page somewhere and want the QR to always point to that final URL,
+        set CANONICAL_URL below (example: "https://example.com/recipes/casserole.html").
+      - QR image is generated via a free endpoint (hotlink image). If you'd rather self-host the QR,
+        replace the qrSrc() function to point at your own image.
+    */
+    const CANONICAL_URL = ""; // <-- optional: put your final public URL here
+
+    function effectiveUrl(){
+      return (CANONICAL_URL && CANONICAL_URL.trim().length > 0) ? CANONICAL_URL.trim() : location.href;
+    }
+
+    function qrSrc(url){
+      // Free QR image endpoint (hotlink). Size is 200x200, no JS library needed.
+      const encoded = encodeURIComponent(url);
+      return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encoded}`;
+    }
+
+    function updateQr(){
+      const url = effectiveUrl();
+      const img = document.getElementById("qrimg");
+      const out = document.getElementById("qrurl");
+      if(img) img.src = qrSrc(url);
+      if(out) out.textContent = url;
+    }
+
+    function togglePrintMode(){
+      document.body.classList.toggle("printmode");
+      toast(document.body.classList.contains("printmode") ? "Print Mode: ON 🧾" : "Print Mode: OFF ✨");
+      updateQr();
+    }
+
     // tiny toast for copy feedback
-    const toast = (msg) => {
+    function toast(msg){
       let el = document.getElementById("toast");
       if(!el){
         el = document.createElement("div");
@@ -487,7 +684,10 @@
       el.style.opacity = "1";
       clearTimeout(window.__t);
       window.__t = setTimeout(()=>{ el.style.opacity = "0"; }, 1200);
-    };
+    }
+
+    // init
+    updateQr();
   </script>
 </body>
 </html>
