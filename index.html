@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crispy Hash Brown Breakfast Casserole (Bacon + Sausage)</title>
+  <meta name="description" content="A 90-minute breakfast casserole for 5 with crispy (not soggy!) shredded hash browns, bacon, sausage, and carrots+peas." />
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.09);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.14);
+      --accent:#ffcc66;
+      --accent2:#7dd3fc;
+      --good:#86efac;
+      --warn:#fda4af;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1120px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(125,211,252,.18), transparent 55%),
+        radial-gradient(900px 600px at 80% 30%, rgba(255,204,102,.14), transparent 60%),
+        radial-gradient(900px 600px at 50% 100%, rgba(134,239,172,.08), transparent 55%),
+        var(--bg);
+      line-height:1.55;
+    }
+    a{color:var(--accent2); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 70px}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(120deg, rgba(11,15,20,.55), rgba(11,15,20,.20)),
+        url("https://source.unsplash.com/a4vZKIwoCUE/2000x1200") center/cover no-repeat;
+      min-height: 420px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .hero::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(to top, rgba(11,15,20,.92), rgba(11,15,20,.35), transparent 70%),
+        radial-gradient(900px 420px at 20% 70%, rgba(255,204,102,.15), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;
+      padding:34px 26px;
+      width:100%;
+      display:grid;
+      gap:14px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      color:var(--muted);
+      font-family:var(--mono);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.08);
+      backdrop-filter: blur(8px);
+    }
+    h1{
+      margin:0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      max-width:70ch;
+      color:var(--muted);
+      font-size: clamp(14px, 2.1vw, 18px);
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:8px;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.08);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      letter-spacing:.01em;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      backdrop-filter: blur(10px);
+    }
+    .btn:hover{background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.26)}
+    .btn:active{transform: translateY(1px)}
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(255,204,102,.25), rgba(125,211,252,.18));
+      border-color:rgba(255,204,102,.35);
+    }
+
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+    }
+    @media (max-width: 920px){
+      .grid{grid-template-columns: 1fr}
+    }
+
+    .card{
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 20px 80px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:16px 16px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+    }
+    .card .hd h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:-.01em;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      color:var(--muted);
+      font-size:13px;
+      font-family:var(--mono);
+    }
+    .meta span{
+      padding:6px 9px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+    }
+    .bd{padding:14px 16px 18px}
+
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    @media (max-width: 560px){
+      .two-col{grid-template-columns: 1fr}
+    }
+
+    .list{
+      margin:0; padding-left:18px;
+      color:var(--text);
+    }
+    .list li{margin:8px 0}
+    .muted{color:var(--muted)}
+    .callout{
+      padding:14px 14px;
+      border-radius:14px;
+      background: linear-gradient(135deg, rgba(255,204,102,.14), rgba(125,211,252,.10));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .callout b{color:#fff}
+    .rule{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      margin:10px 0;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      margin-top:6px;
+      background:var(--good);
+      box-shadow: 0 0 0 4px rgba(134,239,172,.12);
+      flex:0 0 auto;
+    }
+    .dot.warn{
+      background:var(--warn);
+      box-shadow: 0 0 0 4px rgba(253,164,175,.12);
+    }
+
+    .steps{
+      counter-reset: step;
+      display:grid;
+      gap:12px;
+      margin:0;
+      padding:0;
+      list-style:none;
+    }
+    .steps li{
+      counter-increment: step;
+      padding:14px 14px 14px 54px;
+      position:relative;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+    }
+    .steps li::before{
+      content: counter(step);
+      position:absolute;
+      left:14px; top:14px;
+      width:30px; height:30px;
+      border-radius:999px;
+      display:grid; place-items:center;
+      font-family:var(--mono);
+      font-weight:700;
+      color:rgba(11,15,20,.95);
+      background: linear-gradient(135deg, rgba(255,204,102,.95), rgba(125,211,252,.85));
+      box-shadow: 0 10px 28px rgba(0,0,0,.30);
+    }
+    .time{
+      font-family:var(--mono);
+      color:var(--muted);
+      font-size:12px;
+      margin-top:6px;
+    }
+
+    .side-photo{
+      min-height: 220px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.25), rgba(11,15,20,.70)),
+        url("https://source.unsplash.com/lqRfdLcZm_w/1400x900") center/cover no-repeat;
+    }
+    .small{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .kbd{
+      font-family:var(--mono);
+      font-size:12px;
+      padding:2px 8px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      display:inline-block;
+    }
+
+    footer{
+      margin-top:16px;
+      color:var(--muted);
+      font-size:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      padding-top:14px;
+    }
+
+    /* Print: make it clean and ink-friendly */
+    @media print{
+      body{background:#fff; color:#111}
+      .wrap{max-width:900px}
+      .hero{min-height:auto; background:#fff; box-shadow:none; border:none}
+      .hero::after{display:none}
+      .hero-inner{padding:0 0 10px}
+      .btn, .side-photo{display:none !important}
+      .card{box-shadow:none; border:1px solid #ddd}
+      .card .hd{border-bottom:1px solid #ddd}
+      a{color:#111; text-decoration:none}
+      .meta span{border:1px solid #ddd; background:#f6f6f6; color:#333}
+      .steps li{background:#fff; border:1px solid #ddd}
+      .steps li::before{background:#eee; color:#111; box-shadow:none}
+      footer{border-top:1px solid #ddd}
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wrap">
+    <section class="hero" role="banner" aria-label="Recipe hero">
+      <div class="hero-inner">
+        <div class="kicker">
+          <span class="pill">90 minutes or less</span>
+          <span class="pill">serves 5</span>
+          <span class="pill">crispy hash browns (promise)</span>
+        </div>
+
+        <h1>Crispy Hash Brown Breakfast Casserole<br/>with Bacon + Sausage + Carrots &amp; Peas</h1>
+        <p class="sub">
+          This is built like a tiny potato fortress: we thaw, squeeze, and pre-crisp the hash browns so they stay golden instead of turning into a soggy memoir.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn primary" onclick="document.getElementById('recipe').scrollIntoView({behavior:'smooth'})">Jump to Recipe</button>
+          <button class="btn" onclick="window.print()">Print</button>
+          <button class="btn" onclick="navigator.clipboard?.writeText(location.href).then(()=>toast('Link copied ✨')).catch(()=>toast('Copy not supported here'))">
+            Copy Page Link
+          </button>
+          <span class="pill small"><span class="kbd">Tip</span> Uncovered bake = less steam = more crisp</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid" id="recipe">
+      <!-- MAIN -->
+      <article class="card" aria-label="Recipe details">
+        <header class="hd">
+          <div>
+            <h2>Ingredients</h2>
+            <div class="small">Scaled for 5. No cheese listed since you didn’t mention it, but there’s an optional slot if you’ve got some.</div>
+          </div>
+          <div class="meta" aria-label="Recipe meta">
+            <span>Prep: ~30 min</span>
+            <span>Bake: ~45 min</span>
+            <span>Total: ~75–85 min</span>
+          </div>
+        </header>
+
+        <div class="bd">
+          <div class="two-col">
+            <div>
+              <h3 style="margin:0 0 8px">Base</h3>
+              <ul class="list">
+                <li><b>Frozen shredded hash browns</b>: 1 bag (20–24 oz)</li>
+                <li><b>Eggs</b>: 10</li>
+                <li><b>Bacon</b>: 8–10 slices</li>
+                <li><b>Ground breakfast sausage</b>: 8–12 oz</li>
+                <li><b>Frozen carrots + peas mix</b>: 1 to 1½ cups</li>
+                <li class="muted"><b>Optional:</b> shredded cheese 1–1½ cups (cheddar/pepper jack)</li>
+              </ul>
+            </div>
+            <div>
+              <h3 style="margin:0 0 8px">Seasoning + Crisping</h3>
+              <ul class="list">
+                <li><b>Oil / melted butter / bacon fat</b>: 2–3 tbsp (for crisping hash browns)</li>
+                <li><b>Kosher salt</b>: ~1½ tsp total (adjust for salty bacon)</li>
+                <li><b>Black pepper</b>: 1 tsp</li>
+                <li><b>Garlic powder</b>: 1 tsp</li>
+                <li><b>Smoked paprika</b>: 1 tsp</li>
+                <li class="muted"><b>Optional:</b> pinch cayenne or red pepper flakes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout" style="margin-top:14px">
+            <b>The anti-soggy spell:</b> thaw → squeeze dry → pre-crisp in the pan → cook veggies dry → bake uncovered → rest before slicing.
+          </div>
+
+          <h2 style="margin:18px 0 10px">Steps</h2>
+          <ol class="steps">
+            <li>
+              <b>Heat oven + prep dish</b><br/>
+              Heat to <b>425°F</b>. Grease a <b>9x13</b> dish (wider dish = more crunchy edges).
+              <div class="time">~5 min</div>
+            </li>
+            <li>
+              <b>Thaw + squeeze hash browns</b><br/>
+              Microwave hash browns <b>2–3 min</b>, stir, then <b>2–3 min</b> more until thawed. Wrap in a clean towel and squeeze hard until noticeably drier.
+              <div class="time">~10 min</div>
+            </li>
+            <li>
+              <b>Pre-crisp the hash browns</b><br/>
+              Toss dried hash browns with <b>2–3 tbsp</b> oil/butter/bacon fat, plus <b>½ tsp salt</b>, <b>½ tsp pepper</b>, <b>½ tsp garlic</b>, <b>½ tsp paprika</b>. Spread in an even layer and bake <b>20–25 min</b> at <b>425°F</b> until the top is turning golden.
+              <div class="time">~20–25 min</div>
+            </li>
+            <li>
+              <b>Cook bacon + sausage</b><br/>
+              While potatoes crisp: cook bacon until crisp; chop. Brown sausage until no pink. Drain excess grease.
+              <div class="time">~15–18 min (overlaps step 3)</div>
+            </li>
+            <li>
+              <b>Cook frozen carrots + peas DRY</b><br/>
+              Add the frozen veg to the skillet (after meat is done). Cook until hot and the water is cooked off. If it looks wet, keep going.
+              <div class="time">~5–7 min</div>
+            </li>
+            <li>
+              <b>Whisk egg mix</b><br/>
+              Whisk <b>10 eggs</b> with remaining seasoning: about <b>1 tsp salt</b> (less if your bacon is salty), <b>½ tsp pepper</b>, <b>½ tsp garlic</b>, <b>½ tsp paprika</b>, optional pinch cayenne.
+              <div class="time">~3–5 min</div>
+            </li>
+            <li>
+              <b>Assemble</b><br/>
+              Pull crisped hash browns. Scatter bacon + sausage + carrots/peas evenly. Optional: add cheese. Pour egg mixture over everything.
+              <div class="time">~5 min</div>
+            </li>
+            <li>
+              <b>Final bake</b><br/>
+              Reduce oven to <b>375°F</b>. Bake <b>20–25 min</b>, <b>uncovered</b>, until center is set (or 160°F).
+              <div class="time">~20–25 min</div>
+            </li>
+            <li>
+              <b>Rest + serve</b><br/>
+              Rest <b>10 min</b> before slicing. This helps it set AND keeps the potato layer crisper.
+              <div class="time">~10 min</div>
+            </li>
+          </ol>
+
+          <h2 style="margin:18px 0 10px">Crispiness Checklist</h2>
+          <div class="rule"><span class="dot"></span><div><b>Squeeze the hash browns.</b> If they can drip, they can sog.</div></div>
+          <div class="rule"><span class="dot"></span><div><b>Pre-crisp at 425°F.</b> We’re building a crunchy roof before the egg “weather” moves in.</div></div>
+          <div class="rule"><span class="dot"></span><div><b>Cook the carrots + peas dry.</b> Steam is great for sweaters, terrible for potatoes.</div></div>
+          <div class="rule"><span class="dot warn"></span><div><b>Avoid covering while baking.</b> Foil traps steam and turns crisp into “soft regret.”</div></div>
+        </div>
+      </article>
+
+      <!-- SIDE -->
+      <aside class="card" aria-label="Quick reference">
+        <div class="side-photo" aria-hidden="true"></div>
+        <div class="bd">
+          <h2 style="margin:0 0 10px">Quick Reference</h2>
+          <ul class="list">
+            <li><b>Oven:</b> 425°F to pre-crisp, then 375°F to bake</li>
+            <li><b>Hash browns:</b> thaw + squeeze + oil + bake 20–25 min</li>
+            <li><b>Veg:</b> cook moisture off before adding</li>
+            <li><b>Doneness:</b> center set, or 160°F</li>
+            <li><b>Rest:</b> 10 min before slicing</li>
+          </ul>
+
+          <div class="callout" style="margin-top:14px">
+            <b>Optional upgrades</b><br/>
+            • Sprinkle cheese on top for a golden lid<br/>
+            • Add onion powder if you’ve got it<br/>
+            • Finish with a 2-minute broil (watch closely)
+          </div>
+
+          <footer>
+            <div><b>Photo credits (Unsplash)</b> · free to use under the Unsplash License</div>
+            <div class="small">
+              Hero: <a href="https://unsplash.com/photos/a4vZKIwoCUE" target="_blank" rel="noreferrer">a4vZKIwoCUE</a> ·
+              Side: <a href="https://unsplash.com/photos/lqRfdLcZm_w" target="_blank" rel="noreferrer">lqRfdLcZm_w</a>
+            </div>
+          </footer>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // tiny toast for copy feedback
+    const toast = (msg) => {
+      let el = document.getElementById("toast");
+      if(!el){
+        el = document.createElement("div");
+        el.id = "toast";
+        el.style.position = "fixed";
+        el.style.left = "50%";
+        el.style.bottom = "18px";
+        el.style.transform = "translateX(-50%)";
+        el.style.padding = "10px 14px";
+        el.style.borderRadius = "12px";
+        el.style.background = "rgba(0,0,0,.72)";
+        el.style.color = "white";
+        el.style.border = "1px solid rgba(255,255,255,.16)";
+        el.style.boxShadow = "0 18px 60px rgba(0,0,0,.45)";
+        el.style.backdropFilter = "blur(10px)";
+        el.style.fontFamily = "ui-sans-serif, system-ui";
+        el.style.fontWeight = "600";
+        el.style.zIndex = "9999";
+        el.style.opacity = "0";
+        el.style.transition = "opacity .15s ease";
+        document.body.appendChild(el);
+      }
+      el.textContent = msg;
+      el.style.opacity = "1";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=>{ el.style.opacity = "0"; }, 1200);
+    };
+  </script>
+</body>
+</html>
